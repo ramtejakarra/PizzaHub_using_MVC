@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PizzaHub</title>
+
+    <!-- Load Bootstrap CSS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
+            <div class="container-fluid">
+
+                <!-- Brand -->
+                <a class="navbar-brand" href="/">🍕 PizzaHub</a>
+
+                <!-- Mobile Toggle -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Nav Links -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+
+                        <!-- Home -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
+
+                        <!-- Menu -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Menu">Menu</a>
+                        </li>
+
+                        <!-- Cart (Fixed) -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Cart">
+                                Cart
+                                @{
+                                    var cartCount = Context.Session.GetInt32("CartItems") ?? 0;
+                                }
+                                @if (cartCount > 0)
+                                {
+                                    <span class="badge bg-primary">@cartCount</span>
+                                }
+                            </a>
+                        </li>
+
+                        <!-- My Orders (Only if logged in) -->
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Order/History">My Orders</a>
+                            </li>
+                        }
+
+                        <!-- Admin Menu (Only if Admin) -->
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown">
+                                    Admin
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                                    <li><a class="dropdown-item" href="/Admin/ManagePizzas">Manage Pizzas</a></li>
+                                    <li><a class="dropdown-item" href="/Admin/AllOrders">View All Orders</a></li>
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+
+                    <!-- Login/Logout Partial -->
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container" style="margin-top: 70px;">
+        <main role="main" class="pb-3">
+
+            <!-- Success/Error Messages -->
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success">
+                    @TempData["Success"]
+                </div>
+            }
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["Error"]
+                </div>
+            }
+
+            <!-- Page Content -->
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer mt-auto py-3 bg-light text-center">
+        <div class="container">
+            &copy; 2025 - PizzaHub - <a href="/Home/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

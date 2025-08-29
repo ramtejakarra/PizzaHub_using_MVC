@@ -1,0 +1,23 @@
+# Visual Studio cache/options
+.vs/
+
+# Build results
+bin/
+obj/
+Debug/
+Release/
+x64/
+x86/
+arm/
+arm64/
+
+# User-specific
+*.user
+*.suo
+
+# Logs
+*.log
+
+# Optional
+wwwroot/lib/
+publish/

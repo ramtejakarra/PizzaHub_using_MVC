@@ -1,0 +1,27 @@
+﻿@model List<PizzaHub.Models.Pizza>
+
+<h2>Manage Pizzas</h2>
+<a asp-action="CreatePizza" class="btn btn-primary mb-3">Add New Pizza</a>
+
+<div class="row">
+    @foreach (var p in Model)
+    {
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <img src="~/images/pizzas/@p.ImageFileName" class="card-img-top" style="height:200px;object-fit:cover;" />
+                <div class="card-body">
+                    <h5>@p.Name</h5>
+                    <p>@p.Description</p>
+                    <p class="fw-bold">₹@p.Price.ToString("F2")</p>
+                    <div>
+                        <a asp-action="EditPizza" asp-route-id="@p.Id" class="btn btn-sm btn-warning">Edit</a>
+                        <form asp-action="DeletePizza" method="post" style="display:inline">
+                            <input type="hidden" name="id" value="@p.Id" />
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this pizza?')">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

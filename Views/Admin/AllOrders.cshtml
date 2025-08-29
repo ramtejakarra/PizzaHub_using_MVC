@@ -1,0 +1,30 @@
+﻿@model List<PizzaHub.Models.Order>
+
+<h2>All Orders</h2>
+
+<table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <th>User</th>
+        <th>Date</th>
+        <th>Total</th>
+        <th>Items</th>
+    </tr>
+    @foreach (var o in Model)
+    {
+        <tr>
+            <td>#@o.Id</td>
+            <td>@o.User.FullName ?? @o.User.Email</td>
+            <td>@o.OrderDate.ToString("g")</td>
+            <td>₹@o.TotalAmount.ToString("F2")</td>
+            <td>
+                <ul>
+                    @foreach (var i in o.Items)
+                    {
+                        <li>@i.Quantity x @i.Pizza.Name (₹@i.PriceAtTime) each</li>
+                    }
+                </ul>
+            </td>
+        </tr>
+    }
+</table>

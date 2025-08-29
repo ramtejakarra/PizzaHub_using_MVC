@@ -1,0 +1,22 @@
+﻿@model PizzaHub.Models.Order
+
+@{
+    ViewData["Title"] = "Order Confirmed";
+}
+
+<h2 class="my-4">✅ Order Confirmed!</h2>
+<p>Thank you for your order. Your order ID is: <strong>#@Model.Id</strong></p>
+
+<h4>Items:</h4>
+<ul>
+    @foreach (var item in Model.Items)
+    {
+        <li>@item.Quantity x @item.Pizza.Name - ₹@((item.PriceAtTime * item.Quantity).ToString("F2"))</li>
+    }
+</ul>
+<p><strong>Total: ₹@Model.TotalAmount.ToString("F2")</strong></p>
+
+<div class="mt-4">
+    <a asp-action="History" class="btn btn-primary">View Order History</a>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Back to Home</a>
+</div>

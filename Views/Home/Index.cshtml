@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<main role="main" class="pb-3">
+    <!-- Hero Section -->
+    <div class="container-fluid bg-dark text-white py-5 text-center">
+        <h1 class="display-4">🍕 Welcome to PizzaHub</h1>
+        <p class="lead">Fresh, hot pizzas delivered to your door in under 30 minutes!</p>
+        <a asp-controller="Menu" asp-action="Index" class="btn btn-warning btn-lg">Order Now</a>
+    </div>
+
+    <!-- Features Section -->
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Why Choose Us?</h2>
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <i class="fas fa-bolt text-primary" style="font-size: 2.5rem;"></i>
+                <h4>Fast Delivery</h4>
+                <p>Get your pizza in just 20–30 minutes, guaranteed.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <i class="fas fa-utensils text-success" style="font-size: 2.5rem;"></i>
+                <h4>Fresh Ingredients</h4>
+                <p>Handmade dough, fresh mozzarella, and real cheese — no shortcuts.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <i class="fas fa-star text-warning" style="font-size: 2.5rem;"></i>
+                <h4>Customer Love</h4>
+                <p>Rated 5 stars by over 10,000 happy customers.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="bg-light text-center py-4 mt-5">
+        <h3>Ready to Order?</h3>
+        <p class="lead">Check out our menu and place your order now!</p>
+        <a asp-controller="Menu" asp-action="Index" class="btn btn-primary btn-lg">View Menu</a>
+    </div>
+</main>
